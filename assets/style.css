@@ -1,0 +1,48 @@
+.siteTitle {
+    text-shadow: 1px 1px lightslategrey;
+    font-size: 100px;
+}
+
+header {
+  font-weight: 700;
+  margin-bottom: 2vw;
+  line-height: 3;
+  text-align: center;
+  border-style: groove;
+}
+
+.card {
+    margin: 20px;
+    padding: 5px;
+    border: 3px solid lightsalmon;
+    border-radius: var(--border-radius);
+
+  }
+
+.card-header {
+    background-color: lightsalmon;
+    padding: 2.5%;
+    border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
+}
+
+.city {
+    padding: 2.5%;
+  }
+
+.form-input, .form-textarea {
+  display: block;
+}
+
+  .form-input {
+    width: 100%;
+    padding: 3%;
+    margin: 5px 0;
+    font-size: 1.2rem;
+    border: 2px solid lightsalmon;
+    border-radius: calc(.18rem - 1px) calc(.18rem - 1px) 0 0;
+  }
+
+  .stored, .results {
+    margin: 20px;
+    padding: 5px;
+  }
