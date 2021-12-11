@@ -7,8 +7,10 @@ header {
   font-weight: 700;
   margin-bottom: 2vw;
   line-height: 3;
+  -webkit-text-size-adjust: 100%;
   text-align: center;
   border-style: groove;
+  width: auto;
 }
 
 .card {
@@ -45,4 +47,12 @@ header {
   .stored, .results {
     margin: 20px;
     padding: 5px;
+  }
+
+  .container {
+    margin: .5px !important;
+  }
+
+  .results {
+    flex-wrap: wrap;
   }

@@ -12,35 +12,42 @@
     <title>Weather Dashboard</title>
 </head>
 
-<body class="flex-column min-100-vh">
+<!-- primary container -->
+<body>
+    <!-- header -->
     <header class="hero bg-info bg-gradient">
         <h1 class="siteTitle">Weather Dashboard</h1>
     </header>
 
-    <main class="flex-row justify-space-between">
-        
-        <div class="col-2 col-lg-4">
-    
-            <div class="card">
-        <h2 class="card-header">
-            Search for Weather Data by City:
-        </h2>
-        <input name="city" id="city" type="text" autofocus="true" class="form-input" />
-        <button type="submit" class="btn btn-warning">SEARCH</button>
-    </div>
-    
-    <div id="stored" class="stored">Stored Cities Here</div>
-</div>
-</main>
+    <!-- main container -->
+    <section class="container d-flex row min-100-vh">
 
-<div class="results col-8 col-md-6">
-    <h2>Weather Data</h2>
-    <span id="weather"></span></h2>
-    <div id="weather-container" class="-group"></div>
-</div>
+        <!-- card and stored cities -->
+        <main class="col-8 col-lg-4">
+<!-- card -->
+                <div class="card">
+                    <h2 class="card-header">
+                        Search for Weather Data by City:
+                    </h2>
+                    <input name="city" id="city" type="text" autofocus="true" class="form-input" />
+                    <button type="submit" class="btn btn-warning">SEARCH</button>
+                </div>
+<!-- stored cities -->
+                <div id="stored" class="stored">Stored Cities Here</div>
+        </main>
+
+        <!-- weather data -->
+        <div class="results col-12 col-lg-8">
+            <h2>Weather Data</h2>
+            <span id="weather"></span></h2>
+            <div id="weather-container" class="-group"></div>
+        </div>
+
+    </section>
 
     </div>
-</main>
+    </main>
+    <script src="assets/script.js"></script>
 </body>
 
 </html>
