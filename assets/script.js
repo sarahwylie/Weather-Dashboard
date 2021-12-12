@@ -1,6 +1,6 @@
 var cityBtn = document.querySelector(".btn");
 var cityInputEl = document.querySelector("#city");
-var weatherOutput = document.querySelector("#weather-container");
+var weatherOutput = document.querySelector("#results");
 var city
 var cityWeather 
 

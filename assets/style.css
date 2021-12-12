@@ -17,8 +17,6 @@ header {
     margin: 20px;
     padding: 5px;
     border: 3px solid lightsalmon;
-    border-radius: var(--border-radius);
-
   }
 
 .card-header {
@@ -53,6 +51,9 @@ header {
     margin: .5px !important;
   }
 
-  .results {
+  #current-weather, #day-1, #day-2, #day-3, #day-4, #day-5 {
     flex-wrap: wrap;
+    margin: 20px;
+    padding: 5px;
+    border: 3px solid lightsalmon;
   }
