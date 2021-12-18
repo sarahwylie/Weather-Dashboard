@@ -11,6 +11,7 @@ var formSubmitHandler = function (event) {
 
     if (city) {
         getCity(city);
+        storeCity(city);
 
         //clear old content from form input
         // weatherOutput.value = "";
@@ -25,7 +26,7 @@ var formSubmitHandler = function (event) {
 var getCity = function (city) {
     // event.preventDefault();
     //weather api url
-    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=ab3299daa73e778a4f0c3bf18298f8d6`;
+    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=ab3299daa73e778a4f0c3bf18298f8d6&units=imperial`;
     console.log(apiUrl)
     //make a request to the url
     fetch(apiUrl)
@@ -45,8 +46,8 @@ var getCity = function (city) {
         })
         .then(function (res) {
             console.log(res);
-            fetchWeather(res.city);
-            storeCity();
+            fetchWeather(res);
+            storeCity(res.name);
         })
 
         // .catch(function (error) {
@@ -58,9 +59,18 @@ var history = [];
 
 //add city to stored list
 var storeCity = function (city) {
-history.push(city);
+// history.push(city);
 localStorage.setItem("searchHistory", JSON.stringify(history));
-    // $("#stored .form-input").val(localStorage.getItem("stored"));
+console.log("city", city)
+var retrieveCity = function () {
+    console.log("retrieve", searchHistory)
+    // let stored = document.getElementById("stored");
+    var stored = document.createElement("btn");
+    JSON.parse(localStorage.getItem("searchHistory"));
+    // stored.append(body);
+    return history.textContent = "";
+};
+    $("#stored .form-input").val(localStorage.getItem("stored"));
     // for (history) {
     //     textContent
     //     // text content for cityBtn
@@ -68,11 +78,20 @@ localStorage.setItem("searchHistory", JSON.stringify(history));
     // }
 };
 
+var retrieveCity = function () {
+    console.log("retrieve", searchHistory)
+    // let stored = document.getElementById("stored");
+    var stored = document.createElement("btn");
+    JSON.parse(localStorage.getItem("searchHistory"));
+    // stored.append(body);
+    history.textContent = "";
+};
+
 //Display the current weather
 var displayCurrentWeather = function (city, nugz, timezone) {
-    console.log(nugz)
+    // console.log(nugz)
 
-    // var date = nugz.list[0].dt_txt;
+    var date = nugz.dt;
     var temp = nugz.temp;
     var wind = nugz.wind_speed;
     var humidity = nugz.humidity;
@@ -81,7 +100,7 @@ var displayCurrentWeather = function (city, nugz, timezone) {
     var container = document.createElement("div");
     var body = document.createElement("div");
     var header = document.createElement("h2");
-    // var pdate = document.createElement("h3");
+    var pdate = document.createElement("h3");
     var image = document.createElement("img")
     var ptemp = document.createElement("p");
     var pwind = document.createElement("p");
@@ -90,7 +109,7 @@ var displayCurrentWeather = function (city, nugz, timezone) {
 
     container.append(body);
     header.textContent = `${city}`
-    // pdate.textContent = `${dt_txt}`
+    pdate.textContent = `${new Date(nugz.dt*1000)}`
 
     var getIcon = nugz.weather[0].icon;
     image.src = `https://openweathermap.org/img/w/${getIcon}.png`
@@ -101,15 +120,17 @@ var displayCurrentWeather = function (city, nugz, timezone) {
     phumidity.textContent = `Humidity: ${humidity}`
     puvi.textContent = `UV Index: ${uvi}`
 
+    console.log(nugz)
+
     body.append(header, pdate, ptemp, pwind, phumidity, puvi);
     weatherOutput.innerHTML = " ";
     weatherOutput.append(container);
 
-    var currentForecast = nugz.list[0];
+    var currentForecast = nugz.list;
     console.log(currentForecast)
 
-    var forecast = currentForecast.weather[0];
-    console.log("forecast", forecast)
+    // var forecast = currentForecast.weather;
+    
 
     //openweathermap.org/img/w/04d
     // var getIcon = nugz.weather[0].icon;
@@ -121,10 +142,11 @@ var displayCurrentWeather = function (city, nugz, timezone) {
 };
 
 var fetchWeather = function (pball) {
+    // console.log(pball);
     var lat = pball.coord.lat;
     var lon = pball.coord.lon;
     var city = pball.name;
-    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=ab3299daa73e778a4f0c3bf18298f8d6`
+    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=ab3299daa73e778a4f0c3bf18298f8d6&units=imperial`
 
     fetch(apiUrl)
         .then(function (response) {
@@ -145,7 +167,57 @@ var renderWeather = function (city, data) {
 }
 
 var displayFutureWeather = function(data) {
+    var apiUrlFuture = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=ab3299daa73e778a4f0c3bf18298f8d6&units=imperial`;
+    fetch(apiUrlFuture)
+    .then(function (response) {
+        return response.json();
+    })
+    var fiveForecast = function(city, fore, timezone) {
+    var fdate = fore.dt[1];
+    var ftemp = fore.temp[1];
+    var fwind = fore.wind_speed[1];
+    var fhumidity = fore.humidity[1];
+    var fuvi = fore.uvi[1];
 
+    fdate = document.querySelector("date-1");
+        displayFutureWeather.textContent = `${new Date(fore.dt[1]*1000)}`
+    var fimage1 = document.querySelector("img-1")
+    var getIcon = fore.weather[1].icon;
+    image.src = `https://openweathermap.org/img/w/${getIcon}.png`
+        displayFutureWeather.textContent = `${fimage1}`
+    var fptemp = document.createElement("temp-1");
+    displayFutureWeather.textContent = `${ftemp}`
+    var fpwind = document.createElement("wind-1");
+    displayFutureWeather.textContent = `${fwind}`
+    var fphumidity = document.createElement("hum-1");
+    displayFutureWeather.textContent = `${fhumidity}`
+    var fpuvi = document.createElement("uvi-1");
+    displayFutureWeather.textContent = `${fuvi}`
+
+    // fheader.textContent = `${city}`
+    // fpdate.textContent = `${new Date(fore.dt*1000)}`
+
+    // var getIcon = nugz.weather[1].icon;
+    // fimage.src = `https://openweathermap.org/img/w/${getIcon}.png`
+    // fheader.append(image);
+
+    // ftemp.textContent = `Temperature: ${temp}`
+    // fwind.textContent = `Wind: ${wind}`
+    // fhumidity.textContent = `Humidity: ${humidity}`
+    // fuvi.textContent = `UV Index: ${uvi}`
+    
+    fbody.append(fheader, fpdate, fptemp, fpwind, fphumidity, fpuvi);
+    weatherOutput.innerHTML = " ";
+    weatherOutput.append(container);
+
+    var futureForecast = fore.list;
+    }
+
+    // .then(function (res) {
+    //     // console.log(res);
+    //     fetchForecast(res);
+    //     storeCity(res.name);
+    // })
 }
 
 // var displayWeatherCurrent = function (nugz) {
