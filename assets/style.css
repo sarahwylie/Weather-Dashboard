@@ -51,9 +51,26 @@ header {
     margin: .5px !important;
   }
 
-  #current-weather, #day-1, #day-2, #day-3, #day-4, #day-5 {
+  #current-weather, #forecast {
     flex-wrap: wrap;
     margin: 20px;
     padding: 5px;
     border: 3px solid lightsalmon;
   }
+
+  span.favorable {
+    padding: 3px;
+    background-color: green;
+    color: white;
+  }
+
+  span.moderate{
+    padding: 3px;
+    background-color: yellow;
+}
+
+span.severe{
+  padding: 3px;
+  background-color: red;
+  color:white;
+}
