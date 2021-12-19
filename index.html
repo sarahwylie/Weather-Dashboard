@@ -29,11 +29,11 @@
                     <h2 class="card-header">
                         Search for Weather Data by City:
                     </h2>
-                    <input id="city" type="text" autofocus="true" class="form-input" />
+                    <input id="city" type="text" placeholder="Search for a city" autofocus="true" class="form-input" />
                     <button type="submit" class="city-btn btn btn-warning">SEARCH</button>
                 </div>
 <!-- stored cities -->
-                <container id="stored" class="stored"></container>
+                <container><ul id="stored" class="stored"></ul></container>
         </main>
 
         <!-- weather data -->
@@ -45,8 +45,61 @@
             </div>
         </br>
         <!--5-day forecast-->
-        <h2 class="row">Five Day Forecast</h2>
-        <div id="forecast" class="col forecast">
+        <h2 class="col-12">Five Day Forecast</h2>
+        <div id="forecast" class="card">
+            <div id="day-1" class="card-header">Day One</div>
+                <div class="card-body">
+                <div id="fdate1"></div>
+                <div id="fimg1"></div>
+                <div id="ftemp1"></div>
+                <div id="fwind1"></div>
+                <div id="fhum1"></div>
+            </div>
+        </div>
+            <!--Day Two-->
+            <div id="forecast" class="card">
+            <div id="day-2" class="card-header">Day Two</div>
+            <div class="card-body">
+                <div id="fdate2"></div>
+                <div id="fimg2"></div>
+                <div id="ftemp2"></div>
+                <div id="fwind2"></div>
+                <div id="fhum2"></div>
+            </div>
+        </div>
+            <!--Day Three-->
+            <div id="forecast" class="card">
+            <div id="day-3" class="card-header">Day Three</div>
+            <div class="card-body">
+                <div id="fdate3"></div>
+                <div id="fimg3"></div>
+                <div id="ftemp3"></div>
+                <div id="fwind3"></div>
+                <div id="fhum3"></div>
+            </div>
+        </div>
+            <!--Day Four-->
+            <div id="forecast" class="card">
+            <div id="day-4" class="card-header">Day Four</div>
+            <div class="card-body">
+                <div id="fdate4"></div>
+                <div id="fimg4"></div>
+                <div id="ftemp4"></div>
+                <div id="fwind4"></div>
+                <div id="fhum4"></div>
+            </div>
+        </div>
+            <!--Day Five-->
+            <div id="forecast" class="card">
+            <div id="day-5" class="card-header">Day Five</div>
+            <div class="card-body">
+                <div id="fdate5"></div>
+                <div id="fimg5"></div>
+                <div id="ftemp5"></div>
+                <div id="fwind5"></div>
+                <div id="fhum5"></div>
+            </div>
+        </div>
         </div>
         </section>
 
@@ -55,6 +108,7 @@
     </div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="assets/script.js"></script>
 </body>
 
