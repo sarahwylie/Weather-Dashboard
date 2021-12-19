@@ -90,9 +90,9 @@ var displayCurrentWeather = function (res) {
 
     var city = res.name;
     var date = res.dt;
-    var temp = res.temp;
-    var wind = res.wind_speed;
-    var humidity = res.humidity;
+    var temp = res.main.temp;
+    var wind = res.wind.speed;
+    var humidity = res.main.humidity;
     var uvi = res.uvi;
 
     // var uviEl = function(uvi) {
