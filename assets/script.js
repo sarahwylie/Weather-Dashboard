@@ -1,11 +1,9 @@
 var cityBtn = document.querySelector(".city-btn");
 var cityInputEl = document.querySelector("#city");
 var weatherOutput = document.querySelector("#current-weather");
-var forecast = document.querySelector("#forecast");
+var forecastEl = document.querySelector("#forecast");
 var storedCitiesBtn = document.querySelector("#stored");
 const apiKey = "ab3299daa73e778a4f0c3bf18298f8d6";
-// const input = cityInputEl.value;
-// const url = `https://api.openweathermap.org/data/2.5/weather?q=${input}&appid=${apiKey}&units=imperial`
 var history = [];
 
 //form submit
@@ -34,8 +32,10 @@ var getCity = function (city) {
             return response.json();
         }) .then(function (res) {
             console.log(res);
+            // fetchUvi();
             displayCurrentWeather(res, city);
             storeCity(res.name);
+            get5Day();
         })
 };
 
@@ -59,25 +59,36 @@ var storeCity = function () {
 var citySearchHandler = function (event) {
     var city = event.target.getAttribute("cityData")
     if (city) {
-        fetchWeather();
+        fetchUvi();
     }
 };
 
-//get weather info from site
-var fetchWeather = function (res) {
-    var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
-    var lat = res.coord.lat;
-    var lon = res.coord.lon;
-    var city = res.name;
-    fetch(apiUrl)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (res) {
-            console.log(res);
-            renderWeather(city, res);
-        });
-};
+// //get uvi info
+// var fetchUvi = function (lat, lon) {
+//     var apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
+//     // var lat = response.coord.lat;
+//     // var lon = response.coord.lon;
+//     // var city = response.main.name;
+//     fetch(apiUrl)
+//         .then(function (response) {
+//              return response.json();
+//         })  .then(function (res) {
+//             console.log(res);
+//             displayUvi(res);
+//         });
+// };
+
+// var displayUvi = function(uvi) {
+//     var uviEl = document.createElement("btn");
+//     uviEl.textContent = `UV Index: `
+//         uviEl = uvi.value 
+//         if (uvi.value <= 2) {
+//             uviElVal.classList = "favorable"
+//         } else if (uvi.value > 2 && uvi.value <= 8) {
+//             uviElVal.classList = "moderate"
+//         } else if (uvi.value > 8) {
+//             uviElVal.classList = "severe"
+//         }};
     
 var renderWeather = function (city, data) {
     displayCurrentWeather(city, data.current, data.timezone);
@@ -93,17 +104,6 @@ var displayCurrentWeather = function (res) {
     var temp = res.main.temp;
     var wind = res.wind.speed;
     var humidity = res.main.humidity;
-    var uvi = res.uvi;
-
-    // var uviEl = function(uvi) {
-    //     uviEl = uvi.value 
-    //     if (uvi.value <= 2) {
-    //         uviElVal.classList = "favorable"
-    //     } else if (uvi.value > 2 && uvi.value <= 8) {
-    //         uviElVal.classList = "moderate"
-    //     } else if (uvi.value > 8) {
-    //         uviElVal.classList = "severe"
-    //     }};
 
     var container = document.createElement("div");
     var body = document.createElement("div");
@@ -113,8 +113,6 @@ var displayCurrentWeather = function (res) {
     var ptemp = document.createElement("p");
     var pwind = document.createElement("p");
     var phumidity = document.createElement("p");
-    var puvi = document.createElement("p");
-    // uviEl() = document.createElement("btn");
     
     container.append(body);
     header.textContent = `${city}`
@@ -127,25 +125,38 @@ var displayCurrentWeather = function (res) {
     ptemp.textContent = `Temperature: ${temp + " °F"}`
     pwind.textContent = `Wind: ${wind + "  mph"}`
     phumidity.textContent = `Humidity: ${humidity + "  %"}`
-    puvi.textContent = `UV Index: ${uvi}`
 
-    body.append(header, pdate, ptemp, pwind, phumidity, puvi);
+    body.append(header, pdate, ptemp, pwind, phumidity);
     weatherOutput.innerHTML = " ";
     weatherOutput.append(container);
 };
 
+var get5Day = function(city) {
+    var fapiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`
+    console.log(fapiUrl)
+    fetch(fapiUrl)
+        .then(function (response) {
+            return response.json();
+        }) .then(function (res) {
+            console.log(res);
+            display5Day(res);
+    });
+};
+
 //display future weather
-var display5Day = function(day){
-    forecast.textContent = ""
+var display5Day = function(res){
+    forecastEl.textContent = ""
+console.log("response", res)
+    var date1 = res.list[0].dt;
+    // var forecast = weather;
+    //     for (var i=0; i < 5; i++) {
+    //    var dailyForecast = forecast[i];
+    //         console.log(dailyForecast);
 
-    var daily = day.list;
-        for(var i=5; i < daily.length; i=i+8) {
-       var dailyForecast = daily[i];
-
-       //create date element
-       var forecastDate = docuement.getElementById("fdate")
-       forecastDate.textContent= `${new Date(date * 1000)}`
-       forecast.appendChild(forecastDate);
+       //date1 element
+       var fdate1 = document.querySelector("fdate1")
+       fdate1.textContent= `${new Date(date1 * 1000)}`
+       forecast.appendChild(fdate1);
        
        //create an image element
        var weatherIcon = document.geteElementById("fimg")
@@ -161,7 +172,6 @@ var display5Day = function(day){
        forecastHumEl.textContent = dailyForecast.main.humidity + "  %";
        forecast.appendChild(forecastHumEl);
        forecastContainerEl.appendChild(forecast);
-    }
 };
 
 cityBtn.addEventListener("click", formSubmitHandler);
