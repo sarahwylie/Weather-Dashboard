@@ -58,18 +58,18 @@ header {
     border: 3px solid lightsalmon;
   }
 
-  span.favorable {
+  .favorable {
     padding: 3px;
     background-color: green;
     color: white;
   }
 
-  span.moderate{
+  .moderate{
     padding: 3px;
     background-color: yellow;
 }
 
-span.severe{
+.severe{
   padding: 3px;
   background-color: red;
   color:white;
