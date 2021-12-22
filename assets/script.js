@@ -68,13 +68,13 @@ var storeCity = function () {
 var citySearchHandler = function (event) {
     var btn = event.target
     var search = btn.getAttribute("value")
-        //clear old content from form input
-        C1.value = "";
-        C2.value = "";
-        C3.value = "";
-        C4.value = "";
-        C5.value = "";
-        getCity(search);
+    //clear old content from form input
+    C1.textContent = "";
+    C2.textContent = "";
+    C3.textContent = "";
+    C4.textContent = "";
+    C5.textContent = "";
+    getCity(search);
 };
 
 //get uvi info
@@ -151,13 +151,14 @@ var displayCurrentWeather = function (res) {
 
 //display future weather
 var display5Day = function (res) {
+
     // forecastEl.textContent = ""
     console.log("response", res)
     // var forecast = weather;
     //     for (var i=0; i < 5; i++) {
     //    var dailyForecast = forecast[i];
     //         console.log(dailyForecast);
-    
+
     //date1 element
     var date1 = res.daily[1].dt;
     Day1.textContent = `${new Date(date1 * 1000).toLocaleDateString("en-US")}`
@@ -173,11 +174,11 @@ var display5Day = function (res) {
     //date4 element
     var date4 = res.daily[4].dt;
     Day4.textContent = `${new Date(date4 * 1000).toLocaleDateString("en-US")}`
-    
+
     //date5 element
     var date5 = res.daily[5].dt;
     Day5.textContent = `${new Date(date5 * 1000).toLocaleDateString("en-US")}`
-    
+
     //create an image element
     var img1 = res.daily[1].weather[0].icon;
     var fimg1 = document.createElement("img");
@@ -209,7 +210,7 @@ var display5Day = function (res) {
     var ftemp1 = document.createElement("p");
     C1.append(ftemp1);
     ftemp1.textContent = `Temperature: ${temp1 + " °F"}`;
-    
+
     var temp2 = res.daily[2].temp.day;
     var ftemp2 = document.createElement("p");
     C2.append(ftemp2);
