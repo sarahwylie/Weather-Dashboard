@@ -68,12 +68,6 @@ var storeCity = function () {
 var citySearchHandler = function (event) {
     var btn = event.target
     var search = btn.getAttribute("value")
-    //clear old content from form input
-    C1.textContent = "";
-    C2.textContent = "";
-    C3.textContent = "";
-    C4.textContent = "";
-    C5.textContent = "";
     getCity(search);
 };
 
@@ -151,7 +145,12 @@ var displayCurrentWeather = function (res) {
 
 //display future weather
 var display5Day = function (res) {
-
+    //clear old content from form input
+    C1.textContent = "";
+    C2.textContent = "";
+    C3.textContent = "";
+    C4.textContent = "";
+    C5.textContent = "";
     // forecastEl.textContent = ""
     console.log("response", res)
     // var forecast = weather;
